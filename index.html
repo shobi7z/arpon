@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>حساب النقاط والسعر</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f0f0f0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .container {
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            width: 300px;
+        }
+        h1 {
+            color: #333;
+            margin-bottom: 20px;
+        }
+        input[type="number"] {
+            padding: 12px;
+            margin-bottom: 15px;
+            width: calc(100% - 24px);
+            border: 2px solid #ddd;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+        button {
+            padding: 12px 25px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        .result {
+            margin-top: 20px;
+            padding: 15px;
+            background-color: #f9f9f9;
+            border: 2px solid #ddd;
+            border-radius: 5px;
+            font-size: 18px;
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>حساب النقاط والسعر</h1>
+        <input type="number" id="productCount" placeholder="أدخل عدد المنتجات" min="0">
+        <button onclick="calculatePoints()">احسب عدد النقاط</button>
+        <div class="result" id="result"></div>
+    </div>
+
+    <script>
+        function calculatePoints() {
+            var productCount = document.getElementById('productCount').value;
+            var points = productCount * 50;
+            var price = points * 2;
+            var roundedPrice = Math.ceil(price / 500) * 500;
+            document.getElementById('result').innerHTML = 'عدد النقاط: ' + points + '<br>السعر بالدينار العراقي: ' + roundedPrice;
+        }
+    </script>
+</body>
+</html>
