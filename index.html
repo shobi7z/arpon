@@ -22,6 +22,10 @@
             text-align: center;
             width: 300px;
         }
+        .container video {
+            width: 100%;
+            border-radius: 10px;
+        }
         h1 {
             color: #333;
             margin-bottom: 20px;
@@ -60,6 +64,10 @@
 </head>
 <body>
     <div class="container">
+        <video autoplay loop muted>
+            <source src="https://cdn-icons-mp4.flaticon.com/512/12147/12147282.mp4" type="video/mp4">
+            متصفحك لا يدعم الفيديو.
+        </video>
         <h1>حساب النقاط والسعر</h1>
         <input type="number" id="productCount" placeholder="أدخل عدد المنتجات" min="0">
         <button onclick="calculatePoints()">احسب عدد النقاط</button>
