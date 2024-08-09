@@ -3,85 +3,101 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>حساب النقاط والسعر</title>
+    <title>حساب العربون</title>
     <style>
         body {
-            font-family: 'Arial', sans-serif;
-            background-color: #f0f0f0;
+            font-family: 'Cairo', sans-serif;
+            background-color: #f0f4f8;
             display: flex;
             justify-content: center;
             align-items: center;
             height: 100vh;
             margin: 0;
+            direction: rtl;
         }
         .container {
-            background-color: #fff;
+            background-color: #ffffff;
             padding: 30px;
-            border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 15px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
             text-align: center;
-            width: 300px;
+            width: 350px;
         }
-        .container video {
-            width: 100%;
-            border-radius: 10px;
-        }
-        h1 {
-            color: #333;
+        h2 {
             margin-bottom: 20px;
+            color: #2c3e50;
+            font-size: 24px;
         }
         input[type="number"] {
-            padding: 12px;
-            margin-bottom: 15px;
-            width: calc(100% - 24px);
-            border: 2px solid #ddd;
-            border-radius: 5px;
-            font-size: 16px;
+            width: 95%;
+            padding: 12px 8px;
+            margin-bottom: 20px;
+            border: 2px solid #dcdde1;
+            border-radius: 10px;
+            font-size: 18px;
+            transition: border-color 0.3s ease;
+        }
+        input[type="number"]:focus {
+            border-color: #3498db;
+            outline: none;
         }
         button {
-            padding: 12px 25px;
-            background-color: #007bff;
-            color: #fff;
+            background-color: #3498db;
+            color: white;
+            padding: 12px 20px;
             border: none;
-            border-radius: 5px;
-            font-size: 16px;
+            border-radius: 10px;
             cursor: pointer;
-            transition: background-color 0.3s;
+            font-size: 18px;
+            transition: background-color 0.3s ease;
+            width: 100%;
         }
         button:hover {
-            background-color: #0056b3;
+            background-color: #2980b9;
         }
         .result {
-            margin-top: 20px;
-            padding: 15px;
-            background-color: #f9f9f9;
-            border: 2px solid #ddd;
-            border-radius: 5px;
-            font-size: 18px;
-            color: #333;
+            margin-top: 25px;
+            font-size: 22px;
+            color: #34495e;
+            font-weight: bold;
+        }
+        @media (max-width: 400px) {
+            .container {
+                width: 90%;
+                padding: 20px;
+            }
         }
     </style>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600&display=swap" rel="stylesheet">
 </head>
 <body>
-    <div class="container">
-        <video autoplay loop muted>
-            <source src="https://cdn-icons-mp4.flaticon.com/512/12147/12147282.mp4" type="video/mp4">
-            متصفحك لا يدعم الفيديو.
-        </video>
-        <h1>حساب النقاط والسعر</h1>
-        <input type="number" id="productCount" placeholder="أدخل عدد المنتجات" min="0">
-        <button onclick="calculatePoints()">احسب عدد النقاط</button>
-        <div class="result" id="result"></div>
-    </div>
 
-    <script>
-        function calculatePoints() {
-            var productCount = document.getElementById('productCount').value;
-            var points = productCount * 50;
-            var price = points * 2;
-            var roundedPrice = Math.ceil(price / 500) * 500;
-            document.getElementById('result').innerHTML = 'عدد النقاط: ' + points + '<br>السعر بالدينار العراقي: ' + roundedPrice;
+<div class="container">
+    <h2>حساب العربون</h2>
+    <input type="number" id="priceInput" placeholder="أدخل السعر بالدينار العراقي">
+    <button onclick="calculateDeposit()">احسب العربون</button>
+    <div class="result" id="result"></div>
+</div>
+
+<script>
+    function calculateDeposit() {
+        const price = parseInt(document.getElementById('priceInput').value);
+        let deposit = 0;
+
+        if (price >= 10000 && price <= 20000) {
+            deposit = 5000;
+        } else if (price >= 21000 && price <= 50000) {
+            deposit = 10000;
+        } else if (price >= 51000 && price <= 99000) {
+            deposit = 20000;
+        } else if (price >= 100000) {
+            deposit = Math.floor(price / 100000) * 25000;
         }
-    </script>
+
+        const formattedDeposit = deposit.toLocaleString('ar-EG') + " دينار";
+        document.getElementById('result').textContent = "العربون هو: " + formattedDeposit;
+    }
+</script>
+
 </body>
 </html>
